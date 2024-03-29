@@ -30,9 +30,9 @@ public class Riddle {
     public static Riddle getRiddle() {
         if (riddles == null || currentIndex >= riddles.size() - 1) {
             initializeRiddles();
-            currentIndex = -1;
+            currentIndex = 0;
         }
-        currentIndex++;
+//        currentIndex++;
         return riddles.get(currentIndex);
     }
 

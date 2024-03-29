@@ -36,7 +36,7 @@ public class Main extends javax.swing.JFrame {
     private Statistic statistic;
     private addTask addtask;
     private Riddletab riddle;
-    
+    private static Riddletab instance;
     
     public Main() {
         initComponents();
@@ -59,6 +59,8 @@ public class Main extends javax.swing.JFrame {
         
  
     }
+    
+    
 
     private int x;
     private int y;
@@ -522,8 +524,10 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel11MouseClicked
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-       Riddletab l = new Riddletab();
-        l.setVisible(true); 
+      if (riddle == null) {
+        riddle = new Riddletab(); // Instantiate Riddletab if not already instantiated
+    }
+    riddle.setVisible(true);  
         
     }//GEN-LAST:event_jLabel2MouseClicked
         

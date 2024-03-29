@@ -34,7 +34,7 @@ public class Riddletab extends javax.swing.JFrame {
     SimpleDateFormat st ;
      private Riddle randomRiddle;
      private String currentRiddle;
-     
+       private static Riddletab instance = null;
     public Riddletab() {
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,19 +50,30 @@ public class Riddletab extends javax.swing.JFrame {
         jScrollPane2.setBorder(BorderFactory.createEmptyBorder());
         
         displayRiddle();
-         times();
+        loadCurrentRiddle();
+        times();
     
-        
     }
     
+     public static Riddletab getInstance() {
+        if (instance == null) {
+            instance = new Riddletab();
+        }
+        return instance;
+    }
+    
+    
+    
  public void displayRiddle(){
-     
+   
         randomRiddle = Riddle.getRiddle();
         jTextPane2.setText(randomRiddle.getQuestion());   
         jTextField1.setVisible(true);
        
         saveCurrentRiddle();
-         
+      
+    currentRiddle = randomRiddle.getQuestion(); 
+    
 
  try {
         FileWriter writer = new FileWriter("riddle.txt");
@@ -276,6 +287,7 @@ public void times() {
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         this.setVisible(false);
+     
     }//GEN-LAST:event_jLabel3MouseClicked
 
     
@@ -306,7 +318,7 @@ public void times() {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Riddletab().setVisible(true);
+               
             }
         });
     }
