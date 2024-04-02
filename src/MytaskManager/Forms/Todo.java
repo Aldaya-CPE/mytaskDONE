@@ -212,7 +212,7 @@ public class Todo extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Task", "Date", "Deadline", "TIme"
+                "Task", "Date", "Deadline", "Time"
             }
         ));
         jTable1.setSelectionForeground(new java.awt.Color(117, 118, 116));
@@ -268,6 +268,7 @@ public class Todo extends javax.swing.JPanel {
         ass.setText("Task");
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/done1.png"))); // NOI18N
+        jButton2.setBorder(null);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -275,6 +276,7 @@ public class Todo extends javax.swing.JPanel {
         });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/new add.png"))); // NOI18N
+        jButton3.setBorder(null);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -379,6 +381,7 @@ public class Todo extends javax.swing.JPanel {
         );
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/add.png"))); // NOI18N
+        jButton1.setBorder(null);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -389,6 +392,7 @@ public class Todo extends javax.swing.JPanel {
         jButton5.setForeground(new java.awt.Color(117, 118, 116));
         jButton5.setText("...");
         jButton5.setToolTipText("");
+        jButton5.setBorder(null);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -396,6 +400,7 @@ public class Todo extends javax.swing.JPanel {
         });
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/check.png"))); // NOI18N
+        jButton6.setBorder(null);
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -425,7 +430,7 @@ public class Todo extends javax.swing.JPanel {
                             .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound1Layout.createSequentialGroup()
-                .addGap(0, 50, Short.MAX_VALUE)
+                .addGap(0, 56, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(panelRound5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

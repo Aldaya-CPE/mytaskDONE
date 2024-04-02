@@ -127,7 +127,7 @@ public class Completed extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Todo", "Date", "Deadline", "TIme"
+                "Todo", "Date", "Deadline", "Time"
             }
         ));
         jTable2.setSelectionForeground(new java.awt.Color(117, 118, 116));
@@ -141,6 +141,7 @@ public class Completed extends javax.swing.JPanel {
         compid.setText("jLabel1");
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/check.png"))); // NOI18N
+        jButton1.setBorder(null);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -159,7 +160,7 @@ public class Completed extends javax.swing.JPanel {
                 .addGap(39, 39, 39)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 811, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 817, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton1)
                         .addGap(18, 18, 18))
