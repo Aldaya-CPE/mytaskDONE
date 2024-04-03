@@ -349,6 +349,11 @@ public class Main extends javax.swing.JFrame {
         jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(142, 117, 117));
         jTextField1.setBorder(null);
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/Search (2).png"))); // NOI18N
         jButton1.setBorder(null);
@@ -502,9 +507,9 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         if (this.getExtendedState() == JFrame.MAXIMIZED_BOTH) {
-            this.setExtendedState(JFrame.NORMAL); // Restores window size
+            this.setExtendedState(JFrame.NORMAL); 
         } else {
-            this.setExtendedState(JFrame.MAXIMIZED_BOTH); // Maximizes window
+            this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         }
     }//GEN-LAST:event_jButton10ActionPerformed
 
@@ -548,13 +553,17 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         if (riddle == null) {
-        riddle = new Riddletab(); // Instantiate Riddletab if not already instantiated
+        riddle = new Riddletab(); 
     }
     riddle.setVisible(true); 
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        showForm(todo);
+        String query = jTextField1.getText();
+        searchTask(query);
+    }//GEN-LAST:event_jTextField1ActionPerformed
         
-
-
     private void searchTask(String query) {
     DefaultTableModel model = (DefaultTableModel) todo.jTable1.getModel();
     boolean taskFound = false;
