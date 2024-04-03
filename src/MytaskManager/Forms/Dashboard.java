@@ -56,7 +56,7 @@ public class Dashboard extends javax.swing.JPanel {
         username();
         userId.setVisible(false); 
          
-         timer = new Timer(5000, (e) -> {
+         timer = new Timer(1000, (e) -> {
             populateTable();
             updateDeadline();
             updateCompleted();
@@ -249,7 +249,7 @@ public void times() {
         }
    
         Date date = new Date();
-        st = new SimpleDateFormat("HH:mm a");
+        st = new SimpleDateFormat("hh:mm a");
         String currentTime = st.format(date);
         t_time.setText(currentTime);
 

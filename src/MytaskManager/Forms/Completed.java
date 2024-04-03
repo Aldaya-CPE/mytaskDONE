@@ -47,6 +47,16 @@ public class Completed extends javax.swing.JPanel {
         compid.setVisible(false);  
        
         
+         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/del.png"))); 
+         jButton1.setBorder(null);
+         jButton1.setToolTipText("Delete"); 
+         jButton1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jButton1ActionPerformed(evt);
+        }
+    });
+        
+        
         
           timer = new Timer(5000, (e) -> {
             populateTable();
@@ -140,7 +150,7 @@ public class Completed extends javax.swing.JPanel {
 
         compid.setText("jLabel1");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/check.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/del.png"))); // NOI18N
         jButton1.setBorder(null);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,7 +170,7 @@ public class Completed extends javax.swing.JPanel {
                 .addGap(39, 39, 39)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 817, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 818, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton1)
                         .addGap(18, 18, 18))

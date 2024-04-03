@@ -12,6 +12,7 @@ import java.awt.event.MouseMotionAdapter;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.UUID;
+import java.util.prefs.Preferences;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -289,7 +290,8 @@ public class Login extends javax.swing.JFrame {
         String enteredUsername = username.getText();
         char[] enteredPassword = password.getPassword();
         if (enteredUsername.equals(adminUsername) && Arrays.equals(enteredPassword, adminPassword.toCharArray())) {
-
+           Preferences prefs = Preferences.userNodeForPackage(Login.class);
+            prefs.putBoolean("isLoggedIn", true);
             JOptionPane.showMessageDialog(this, "Admin login successful!");
 
             Main m = new Main();
@@ -310,6 +312,9 @@ public class Login extends javax.swing.JFrame {
 
                 ModelUser result = controller.Login(login);
                 if (result != null) {
+                    Preferences prefs = Preferences.userNodeForPackage(Login.class);
+                    prefs.putBoolean("isLoggedIn", true);
+                    
                     m.MainID.setText(result.getUserId());
                     m.setExtendedState(JFrame.MAXIMIZED_BOTH); 
                     m.setVisible(true);

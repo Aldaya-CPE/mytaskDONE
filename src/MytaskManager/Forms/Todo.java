@@ -53,17 +53,42 @@ public class Todo extends javax.swing.JPanel {
         
         panelRound5.setVisible(false);
         panelRound2.setVisible(false);
-//        add.setVisible(false);
         mdate = new DateChooser();
         mdeadline = new DateChooser();
         mdate.setTextField(date);
         mdeadline.setTextField(deadline);
         
-        
-         timer = new Timer(5000, (e) -> {
+         timer = new Timer(1000, (e) -> {
             populateTable();
         });
         timer.start();
+        
+        
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/check.png"))); 
+    jButton6.setBorder(null);
+    jButton6.setToolTipText("Done"); 
+    jButton6.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jButton6ActionPerformed(evt);
+        }
+    });
+    
+     jButton5.setBorder(null);
+    jButton5.setToolTipText("More"); 
+    jButton5.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jButton6ActionPerformed(evt);
+        }
+    });
+        
+     jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/add.png"))); 
+    jButton1.setBorder(null);
+    jButton1.setToolTipText("Add task"); 
+    jButton1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jButton6ActionPerformed(evt);
+        }
+    });
         
     }
 
@@ -267,6 +292,7 @@ public class Todo extends javax.swing.JPanel {
         ass.setForeground(new java.awt.Color(102, 102, 102));
         ass.setText("Task");
 
+        jButton2.setBackground(new java.awt.Color(246, 245, 245));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/done1.png"))); // NOI18N
         jButton2.setBorder(null);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -275,6 +301,7 @@ public class Todo extends javax.swing.JPanel {
             }
         });
 
+        jButton3.setBackground(new java.awt.Color(246, 245, 245));
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/new add.png"))); // NOI18N
         jButton3.setBorder(null);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
