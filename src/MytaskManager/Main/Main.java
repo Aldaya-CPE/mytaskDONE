@@ -1,4 +1,5 @@
 package MytaskManager.Main;
+import MytaskManager.Database.Database;
 import MytaskManager.Forms.Calendar;
 import MytaskManager.Forms.Completed;
 import MytaskManager.Forms.Dashboard;
@@ -10,8 +11,6 @@ import MytaskManager.Forms.addTask;
 import MytaskManager.LoginPage.Login;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -23,11 +22,27 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.table.DefaultTableModel;
-
+import java.awt.Color;
+import java.awt.Component;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
+import swing.DataSearch;
+import swing.EventClick;
+import swing.PanelSearch;
+import MytaskManager.Database.Database;
 
 public class Main extends javax.swing.JFrame {
-
+    Connection MyCon;
+     PreparedStatement p;
+     ResultSet r;
     private Dashboard dashboard;
     private Todo todo;
     private Deadline deadline;
@@ -38,11 +53,13 @@ public class Main extends javax.swing.JFrame {
     private Riddletab riddle;
     private static Riddletab instance;
     
+    private JPopupMenu menu;
+    private PanelSearch search;
+    
     public Main() {
         initComponents();
         setBackground(new Color(0,0,0,0));
-             
-    
+        
         deadline = new Deadline();
         todo = new Todo();
         dashboard = new Dashboard(); 
@@ -51,15 +68,42 @@ public class Main extends javax.swing.JFrame {
         statistic = new Statistic();
         addtask = new addTask();
     
+ 
+        menu = new JPopupMenu();
+        search = new PanelSearch();
+        menu.setBorder(BorderFactory.createLineBorder(new Color(164, 164, 164)));
+        menu.add(search);
+        menu.setFocusable(false);
+        search.addEventClick(new EventClick() {
+            @Override
+            public void itemClick(DataSearch data) {
+                menu.setVisible(false);
+                txtSearch.setText(data.getText());
+                addStory(data.getText());
+                System.out.println("Click Item : " + data.getText());
+            }
+
+            @Override
+            public void itemRemove(Component com, DataSearch data) {
+                search.remove(com);
+                removeHistory(data.getText());
+                menu.setPopupSize(menu.getWidth(), (search.getItemSize() * 35) + 2);
+                if (search.getItemSize() == 0) {
+                    menu.setVisible(false);
+                }
+                System.out.println("Remove Item : " + data.getText());
+            }
+        });
         
-   jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/Search (2).png"))); 
-  jButton1.setBorder(null);
-  jButton1.setToolTipText("Search");
-  jButton1.addActionListener(new java.awt.event.ActionListener() {
-    public void actionPerformed(java.awt.event.ActionEvent evt) {
-        jButton1ActionPerformed(evt);
-    }
-});
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/search.png"))); 
+       jButton1.setBorder(null);
+       jButton1.setToolTipText("Search");
+       jButton1.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+             jButton1ActionPerformed(evt);
+         }
+     });
   
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/riddle1.png"))); 
        jButton5.setBorder(null);
@@ -69,15 +113,14 @@ public class Main extends javax.swing.JFrame {
              jButton5ActionPerformed(evt);
          }
      });
-        
+      ;
         showForm(dashboard);
          idtext();
         MainID.setVisible(false);
         initMoving(this);
-        
- 
+         
+      
     }
-    
     
 
     private int x;
@@ -142,13 +185,14 @@ public class Main extends javax.swing.JFrame {
         repaint();
         revalidate();
     }
-    
-    
-    
+   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList<>();
         panelRound1 = new MytaskManager.Components.PanelRound();
         panelGradient2 = new MytaskManager.Components.PanelGradient();
         panelRound3 = new MytaskManager.Components.PanelRound();
@@ -162,13 +206,33 @@ public class Main extends javax.swing.JFrame {
         MainID = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         panelRound2 = new MytaskManager.Components.PanelRound();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtSearch = new swing.MyTextField();
         jButton1 = new javax.swing.JButton();
         changeForm = new MytaskManager.Components.PanelGradient0();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
+
+        jList2.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(jList2);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 657, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -342,20 +406,22 @@ public class Main extends javax.swing.JFrame {
         panelRound2.setRoundTopLeft(60);
         panelRound2.setRoundTopRight(60);
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(142, 117, 117));
-        jLabel4.setText("Search:");
-
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(142, 117, 117));
-        jTextField1.setBorder(null);
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+        txtSearch.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        txtSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtSearchMouseClicked(evt);
+            }
+        });
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSearchKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/Search (2).png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search.png"))); // NOI18N
         jButton1.setBorder(null);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -368,25 +434,19 @@ public class Main extends javax.swing.JFrame {
         panelRound2Layout.setHorizontalGroup(
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelRound2Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(16, 16, 16)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 783, Short.MAX_VALUE)
-                .addGap(25, 25, 25))
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 845, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         panelRound2Layout.setVerticalGroup(
             panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -408,13 +468,15 @@ public class Main extends javax.swing.JFrame {
         panelGradient2Layout.setVerticalGroup(
             panelGradient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelGradient2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addGroup(panelGradient2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panelRound3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelGradient2Layout.createSequentialGroup()
-                        .addComponent(panelRound2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(changeForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(20, 20, 20)
+                        .addComponent(panelRound3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelGradient2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(panelRound2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(29, 29, 29)
+                        .addComponent(changeForm, javax.swing.GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE)))
                 .addGap(20, 20, 20))
         );
 
@@ -546,27 +608,56 @@ public class Main extends javax.swing.JFrame {
         
     }//GEN-LAST:event_formComponentResized
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-          showForm(todo);
-    searchTask(jTextField1.getText());
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         if (riddle == null) {
         riddle = new Riddletab(); 
-    }
-    riddle.setVisible(true); 
+      }
+        riddle.setVisible(true); 
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        showForm(todo);
-        String query = jTextField1.getText();
-        searchTask(query);
-    }//GEN-LAST:event_jTextField1ActionPerformed
-        
-    private void searchTask(String query) {
-    DefaultTableModel model = (DefaultTableModel) todo.jTable1.getModel();
+    private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseClicked
+        if (search.getItemSize() > 0) {
+            menu.show(txtSearch, 0, txtSearch.getHeight());
+            search.clearSelected();
+          
+        }
+    }//GEN-LAST:event_txtSearchMouseClicked
+
+    private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
+       if (evt.getKeyCode() == KeyEvent.VK_UP) {
+            search.keyUp();
+        } else if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
+            search.keyDown();
+        } else if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String text = search.getSelectedText();
+            txtSearch.setText(text);
+            menu.setVisible(false);
+            showForm(todo);
+            performSearch(text);
+            
+        }
+    }//GEN-LAST:event_txtSearchKeyPressed
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+           if (evt.getKeyCode() != KeyEvent.VK_UP && evt.getKeyCode() != KeyEvent.VK_DOWN && evt.getKeyCode() != KeyEvent.VK_ENTER) {
+            String text = txtSearch.getText().trim().toLowerCase();
+            search.setData(search(text));
+            if (search.getItemSize() > 0) {
+                //  * 2 top and bot border
+                menu.show(txtSearch, 0, txtSearch.getHeight());
+                menu.setPopupSize(menu.getWidth(), (search.getItemSize() * 35) + 2);
+                 
+            } else {
+                menu.setVisible(false);
+            }
+        }
+    }//GEN-LAST:event_txtSearchKeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       showForm(todo);
+        DefaultTableModel model = (DefaultTableModel) todo.jTable1.getModel();
     boolean taskFound = false;
+    String query = txtSearch.getText(); 
     
     for (int i = 0; i < model.getRowCount(); i++) {
         String task = model.getValueAt(i, 0).toString(); 
@@ -587,8 +678,82 @@ public class Main extends javax.swing.JFrame {
     if (!taskFound) {
         JOptionPane.showMessageDialog(this, "Task not found!");
     }
-}
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
+    
+    private void performSearch(String query) {
+    DefaultTableModel model = (DefaultTableModel) todo.jTable1.getModel();
+    boolean taskFound = false;
 
+    for (int i = 0; i < model.getRowCount(); i++) {
+        String task = model.getValueAt(i, 0).toString(); 
+        String date = model.getValueAt(i, 1).toString(); 
+        String deadline = model.getValueAt(i, 2).toString(); 
+        String time = model.getValueAt(i, 3).toString(); 
+        if (task.contains(query) || date.contains(query) || deadline.contains(query) || time.contains(query)) {
+            taskFound = true;
+            JOptionPane.showMessageDialog(this, "Task found: " + task + "\nDate: " + date + "\nDeadline: "
+            + deadline + "\nTime: " + time);
+
+            todo.jTable1.setRowSelectionInterval(i, i);
+            todo.jTable1.scrollRectToVisible(todo.jTable1.getCellRect(i, 0, true));
+            break; 
+        }
+    }
+
+    if (!taskFound) {
+        JOptionPane.showMessageDialog(this, "Task not found!");
+    }
+}
+    
+    private List<DataSearch> search(String search) {
+    List<DataSearch> list = new ArrayList<>();
+    try {
+       String sql = "SELECT DISTINCT task FROM todo WHERE userId = ? AND task LIKE ? ORDER BY task LIMIT 7";
+        p = Database.getInstance().getConnection().prepareStatement(sql); 
+        p.setString(1, MainID.getText());  
+        p.setString(2, "%" + search + "%");
+        
+        ResultSet r = p.executeQuery(); 
+        while (r.next()) {
+            String text = r.getString(1);
+            boolean story = false;
+            list.add(new DataSearch(text, story));
+        }
+        r.close();
+        p.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return list;
+}
+    
+    
+        private void removeHistory(String text) {
+    try {
+       String sql ="DELETE FROM todo WHERE task = ? LIMIT 1";
+        p = Database.getInstance().getConnection().prepareStatement(sql); 
+        p.setString(1, text);
+        p.execute();
+        p.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
+   
+    private void addStory(String text) {
+   
+}
+    
+     
+    private void setWhiteBorder(JTextField textField) {
+    Border border = BorderFactory.createLineBorder(Color.WHITE);
+    textField.setBorder(border);
+}
+    
+    
+    
+   
     
     /**
      * @param args the command line arguments
@@ -619,11 +784,13 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JList<String> jList2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane2;
     private MytaskManager.Components.PanelGradient panelGradient2;
     private MytaskManager.Components.PanelRound panelRound1;
     private MytaskManager.Components.PanelRound panelRound2;
     private MytaskManager.Components.PanelRound panelRound3;
+    private swing.MyTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }
