@@ -58,7 +58,7 @@ public class Todo extends javax.swing.JPanel {
         mdate.setTextField(date);
         mdeadline.setTextField(deadline);
         
-         timer = new Timer(1000, (e) -> {
+         timer = new Timer(5000, (e) -> {
             populateTable();
         });
         timer.start();

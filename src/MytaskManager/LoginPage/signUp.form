@@ -36,6 +36,9 @@
   <SubComponents>
     <Container class="MytaskManager.Components.PanelRound" name="panelRound1">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
         <Property name="roundBottomLeft" type="int" value="90"/>
         <Property name="roundBottomRight" type="int" value="90"/>
         <Property name="roundTopLeft" type="int" value="90"/>
@@ -79,6 +82,11 @@
       </Layout>
       <SubComponents>
         <Container class="MytaskManager.Components.PanelGradient" name="panelGradient1">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+          </Properties>
 
           <Layout>
             <DimensionLayout dim="0">
@@ -301,7 +309,7 @@
               <Color blue="ff" green="0" red="0" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/MytaskManager/Icon/icons8-maximize-window-100 (1) (1).png"/>
+              <Image iconType="3" name="/MytaskManager/Icon/retore.png"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
@@ -323,7 +331,7 @@
               <Color blue="0" green="0" red="ff" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/MytaskManager/Icon/icons8-close-window-100 (1).png"/>
+              <Image iconType="3" name="/MytaskManager/Icon/close.png"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
@@ -345,7 +353,7 @@
               <Color blue="ff" green="0" red="0" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/MytaskManager/Icon/icons8-minimize-window-100 (1).png"/>
+              <Image iconType="3" name="/MytaskManager/Icon/minimize.png"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>

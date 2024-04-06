@@ -206,7 +206,7 @@ public class Login extends javax.swing.JFrame {
         jButton9.setBackground(new java.awt.Color(253, 253, 253));
         jButton9.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jButton9.setForeground(new java.awt.Color(255, 0, 0));
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/icons8-close-window-100 (1).png"))); // NOI18N
+        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/close.png"))); // NOI18N
         jButton9.setBorder(null);
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -217,7 +217,7 @@ public class Login extends javax.swing.JFrame {
         jButton10.setBackground(new java.awt.Color(253, 253, 253));
         jButton10.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jButton10.setForeground(new java.awt.Color(0, 0, 255));
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/icons8-maximize-window-100 (1) (1).png"))); // NOI18N
+        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/retore.png"))); // NOI18N
         jButton10.setBorder(null);
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -228,7 +228,7 @@ public class Login extends javax.swing.JFrame {
         jButton8.setBackground(new java.awt.Color(253, 253, 253));
         jButton8.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jButton8.setForeground(new java.awt.Color(0, 0, 255));
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/icons8-minimize-window-100 (1).png"))); // NOI18N
+        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/minimize.png"))); // NOI18N
         jButton8.setBorder(null);
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
