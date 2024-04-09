@@ -556,11 +556,8 @@ public class Todo extends javax.swing.JPanel {
     }//GEN-LAST:event_jTable1ComponentShown
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-//       
-//        int selectedRow = jTable1.getSelectedRow();
-//        DefaultTableModel model =(DefaultTableModel)jTable1.getModel();
-
-        
+        int selectedRow = jTable1.getSelectedRow();
+        DefaultTableModel model =(DefaultTableModel)jTable1.getModel();
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void timeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeActionPerformed
@@ -620,7 +617,7 @@ public class Todo extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        jButton3.setEnabled(false);
+      
         try {
           String sql = "INSERT INTO todo (userId, task, date, deadline, time, timestamp) VALUES (?, ?, ?, ?, ?, ?)";
           ps = Database.getInstance().getConnection().prepareStatement(sql); 
@@ -632,16 +629,14 @@ public class Todo extends javax.swing.JPanel {
          ps.setString(4, deadline.getText());
          ps.setString(5, time.getText());
 
-       
          Timestamp timestamp = new Timestamp(System.currentTimeMillis());
          ps.setTimestamp(6, timestamp);
 
          ps.execute();
          populateTable();
-         
+//         JOptionPane.showMessageDialog(this, "Success");
      } catch (SQLException ex) {
          JOptionPane.showMessageDialog(this, ex, "Error", JOptionPane.ERROR_MESSAGE);
-         jButton3.setEnabled(true);
      }
     }//GEN-LAST:event_jButton3ActionPerformed
 
