@@ -81,7 +81,7 @@ public class Todo extends javax.swing.JPanel {
         mdate.setTextField(date);
         mdeadline.setTextField(deadline);
         
-         timer = new Timer(5000, (e) -> {
+         timer = new Timer(3000, (e) -> {
             populateTable();
         });
         timer.start();
@@ -118,21 +118,21 @@ public class Todo extends javax.swing.JPanel {
         }
     });
     
-    jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/new add.png"))); 
-    jButton3.setBorder(null);
-    jButton3.setToolTipText("insert"); 
-    jButton3.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jButton3ActionPerformed(evt);
-        }
-    });
+//    jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/new add.png"))); 
+//    jButton3.setBorder(null);
+//    jButton3.setToolTipText("insert"); 
+//    jButton3.addActionListener(new java.awt.event.ActionListener() {
+//        public void actionPerformed(java.awt.event.ActionEvent evt) {
+//            jButton3ActionPerformed(evt);
+//        }
+//    });
     
     jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/done1.png"))); 
     jButton2.setBorder(null);
     jButton2.setToolTipText("close"); 
     jButton2.addActionListener(new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jButton3ActionPerformed(evt);
+            jButton2ActionPerformed(evt);
         }
     });
         
@@ -620,7 +620,7 @@ public class Todo extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        
+        jButton3.setEnabled(false);
         try {
           String sql = "INSERT INTO todo (userId, task, date, deadline, time, timestamp) VALUES (?, ?, ?, ?, ?, ?)";
           ps = Database.getInstance().getConnection().prepareStatement(sql); 
@@ -638,10 +638,10 @@ public class Todo extends javax.swing.JPanel {
 
          ps.execute();
          populateTable();
-         JOptionPane.showMessageDialog(this, "Success");
-
+         
      } catch (SQLException ex) {
          JOptionPane.showMessageDialog(this, ex, "Error", JOptionPane.ERROR_MESSAGE);
+         jButton3.setEnabled(true);
      }
     }//GEN-LAST:event_jButton3ActionPerformed
 

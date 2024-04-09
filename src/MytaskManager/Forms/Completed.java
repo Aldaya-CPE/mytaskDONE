@@ -73,14 +73,14 @@ public class Completed extends javax.swing.JPanel {
         Completed.ButtonCursorHandler.setHandCursors(buttonsToApplyHandCursor);
 
         
-         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/del.png"))); 
-         jButton1.setBorder(null);
-         jButton1.setToolTipText("Delete"); 
-         jButton1.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jButton1ActionPerformed(evt);
-        }
-    });
+//         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/del.png"))); 
+//         jButton1.setBorder(null);
+//         jButton1.setToolTipText("Delete"); 
+//         jButton1.addActionListener(new java.awt.event.ActionListener() {
+//        public void actionPerformed(java.awt.event.ActionEvent evt) {
+//            jButton1ActionPerformed(evt);
+//        }
+//    });
         
         
         
