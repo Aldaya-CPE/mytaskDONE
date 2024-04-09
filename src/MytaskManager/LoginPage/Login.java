@@ -7,6 +7,8 @@ import MytaskManager.Model.ModelUser;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -73,6 +75,25 @@ public class Login extends javax.swing.JFrame {
              jButton10ActionPerformed(evt);
          }
      });
+       
+       
+           username.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    jButton1ActionPerformed(null);
+                }
+            }
+        });
+
+        password.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    jButton1ActionPerformed(null);
+                }
+            }
+        });
         
     }
  private int x;
@@ -97,6 +118,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
     }
+  
      private static String generateUID(){
         int userId = 6;
         Random random = new Random();
@@ -331,8 +353,6 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       
-      
-
         String adminUsername = "admin";
         String adminPassword = "admin"; 
 
@@ -375,9 +395,6 @@ public class Login extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Username or Password cannot be empty!");
             }
         }
-
-
-
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

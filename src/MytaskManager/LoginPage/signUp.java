@@ -7,6 +7,8 @@ import MytaskManager.Main.Main;
 import MytaskManager.Model.ModelUser;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -84,6 +86,33 @@ public class signUp extends javax.swing.JFrame {
              jButton10ActionPerformed(evt);
          }
      });
+       
+        susername.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    jButton1ActionPerformed(null);
+                }
+            }
+        });
+
+        spassword.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    jButton2ActionPerformed(null);
+                }
+            }
+        });
+
+        genId.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    jButton2ActionPerformed(null);
+                }
+            }
+        });
     }
      private int x;
     private int y;
