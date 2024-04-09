@@ -6,6 +6,7 @@ import MytaskManager.Forms.Dashboard;
 import MytaskManager.Main.Main;
 import MytaskManager.Model.ModelUser;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -16,6 +17,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.JButton;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 
@@ -25,6 +27,25 @@ public class signUp extends javax.swing.JFrame {
     ResultSet rs;
     userController controller;
     ModelUser userData;
+     private static class ButtonCursorHandler {
+        public static void setHandCursor(JButton button) {
+            button.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                }
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    button.setCursor(Cursor.getDefaultCursor());
+                }
+            });
+        }
+        public static void setHandCursors(JButton... buttons) {
+            for (JButton button : buttons) {
+                setHandCursor(button);
+            }
+        }
+    }
     public signUp() {
        initComponents();
         controller = new userController();
@@ -34,6 +55,10 @@ public class signUp extends javax.swing.JFrame {
         setBackground(new Color(0,0,0,0));
         initMoving(this);
         
+        JButton[] buttonsToApplyHandCursor = {jButton1, jButton2,jButton9, jButton8, jButton10};
+        
+       signUp.ButtonCursorHandler.setHandCursors(buttonsToApplyHandCursor);
+
         
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/close.png"))); 
        jButton9.setBorder(null);

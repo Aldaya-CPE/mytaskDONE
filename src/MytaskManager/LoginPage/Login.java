@@ -6,6 +6,7 @@ import MytaskManager.Main.Main;
 import MytaskManager.Model.ModelUser;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -13,18 +14,40 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.UUID;
 import java.util.prefs.Preferences;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 
 public class Login extends javax.swing.JFrame {
-
+         private static class ButtonCursorHandler {
+        public static void setHandCursor(JButton button) {
+            button.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                }
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    button.setCursor(Cursor.getDefaultCursor());
+                }
+            });
+        }
+        public static void setHandCursors(JButton... buttons) {
+            for (JButton button : buttons) {
+                setHandCursor(button);
+            }
+        }
+    }
     public Login() {
         initComponents();
         setBackground(new Color(0,0,0,0));
         initMoving(this);
         userid.setVisible(false);
+         JButton[] buttonsToApplyHandCursor = {jButton1, jButton2,jButton9, jButton8, jButton10};
         
+        Login.ButtonCursorHandler.setHandCursors(buttonsToApplyHandCursor);
+
         
         jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/close.png"))); 
        jButton9.setBorder(null);

@@ -4,10 +4,14 @@ package MytaskManager.Forms;
 
 
 import MytaskManager.Database.Database;
+import MytaskManager.Main.Main;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import com.raven.datechooser.DateChooser;
+import java.awt.Cursor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,6 +22,7 @@ import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import java.sql.Timestamp;
+import javax.swing.JButton;
 
 
 
@@ -32,7 +37,25 @@ public class Todo extends javax.swing.JPanel {
      private DateChooser mdeadline;
      private String userId = "yourUserId";
      private Timer timer;
-    
+     private static class ButtonCursorHandler {
+        public static void setHandCursor(JButton button) {
+            button.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                }
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    button.setCursor(Cursor.getDefaultCursor());
+                }
+            });
+        }
+        public static void setHandCursors(JButton... buttons) {
+            for (JButton button : buttons) {
+                setHandCursor(button);
+            }
+        }
+    }
 
     public Todo() {
      
@@ -63,6 +86,11 @@ public class Todo extends javax.swing.JPanel {
         });
         timer.start();
         
+         JButton[] buttonsToApplyHandCursor = {jButton1, jButton2,jButton6,jButton3,
+             jButton5};
+        
+        Todo.ButtonCursorHandler.setHandCursors(buttonsToApplyHandCursor);
+
         
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/check.png"))); 
     jButton6.setBorder(null);

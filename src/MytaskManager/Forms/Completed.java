@@ -3,6 +3,10 @@ package MytaskManager.Forms;
 
 
 import MytaskManager.Database.Database;
+import MytaskManager.Main.Main;
+import java.awt.Cursor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -16,6 +20,7 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.Vector;
+import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -29,7 +34,25 @@ public class Completed extends javax.swing.JPanel {
      private DefaultTableCellRenderer centerRenderer;;
      private Timer timer;
      private String userId = "yourUserId";
-    
+     private static class ButtonCursorHandler {
+        public static void setHandCursor(JButton button) {
+            button.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                }
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    button.setCursor(Cursor.getDefaultCursor());
+                }
+            });
+        }
+        public static void setHandCursors(JButton... buttons) {
+            for (JButton button : buttons) {
+                setHandCursor(button);
+            }
+        }
+    }
     public Completed() {
         initComponents();
         try {
@@ -45,7 +68,10 @@ public class Completed extends javax.swing.JPanel {
         centerRenderer = new DefaultTableCellRenderer();
         tableTextCenter();
         compid.setVisible(false);  
-       
+         JButton[] buttonsToApplyHandCursor = {jButton1};
+        
+        Completed.ButtonCursorHandler.setHandCursors(buttonsToApplyHandCursor);
+
         
          jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/del.png"))); 
          jButton1.setBorder(null);
