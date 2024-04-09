@@ -118,47 +118,13 @@ public class Main extends javax.swing.JFrame {
         
         ButtonCursorHandler.setHandCursors(buttonsToApplyHandCursor);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/search.png"))); 
-       jButton1.setBorder(null);
+        
        jButton1.setToolTipText("Search");
-       jButton1.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-             jButton1ActionPerformed(evt);
-         }
-     });
-  
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/riddle1.png"))); 
-       jButton5.setBorder(null);
        jButton5.setToolTipText("View Riddle");
-       jButton5.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-             jButton5ActionPerformed(evt);
-         }
-     });
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/close.png"))); 
-       jButton9.setBorder(null);
        jButton9.setToolTipText("Close");
-       jButton9.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-             jButton9ActionPerformed(evt);
-         }
-     });
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/minimize.png"))); 
-       jButton8.setBorder(null);
        jButton8.setToolTipText("Minimize");
-       jButton8.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-             jButton8ActionPerformed(evt);
-         }
-     });
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/retore.png"))); 
-       jButton10.setBorder(null);
        jButton10.setToolTipText("Restore Pange");
-       jButton10.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-             jButton10ActionPerformed(evt);
-         }
-     });
+       
       
         showForm(dashboard);
          idtext();

@@ -92,49 +92,12 @@ public class Todo extends javax.swing.JPanel {
         Todo.ButtonCursorHandler.setHandCursors(buttonsToApplyHandCursor);
 
         
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/check.png"))); 
-    jButton6.setBorder(null);
+       
     jButton6.setToolTipText("Done"); 
-    jButton6.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jButton6ActionPerformed(evt);
-        }
-    });
-    
-     jButton5.setBorder(null);
     jButton5.setToolTipText("More"); 
-    jButton5.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jButton6ActionPerformed(evt);
-        }
-    });
-        
-     jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/add.png"))); 
-    jButton1.setBorder(null);
     jButton1.setToolTipText("Add task"); 
-    jButton1.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jButton6ActionPerformed(evt);
-        }
-    });
-    
-//    jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/new add.png"))); 
-//    jButton3.setBorder(null);
-//    jButton3.setToolTipText("insert"); 
-//    jButton3.addActionListener(new java.awt.event.ActionListener() {
-//        public void actionPerformed(java.awt.event.ActionEvent evt) {
-//            jButton3ActionPerformed(evt);
-//        }
-//    });
-    
-    jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/done1.png"))); 
-    jButton2.setBorder(null);
-    jButton2.setToolTipText("close"); 
-    jButton2.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jButton2ActionPerformed(evt);
-        }
-    });
+    jButton3.setToolTipText("insert");
+    jButton1.setToolTipText("close");
         
     }
 
