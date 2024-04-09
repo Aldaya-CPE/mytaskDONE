@@ -52,10 +52,28 @@ public class Main extends javax.swing.JFrame {
     private addTask addtask;
     private Riddletab riddle;
     private static Riddletab instance;
-    
     private JPopupMenu menu;
     private PanelSearch search;
     
+    private static class ButtonCursorHandler {
+        public static void setHandCursor(JButton button) {
+            button.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+                }
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    button.setCursor(Cursor.getDefaultCursor());
+                }
+            });
+        }
+        public static void setHandCursors(JButton... buttons) {
+            for (JButton button : buttons) {
+                setHandCursor(button);
+            }
+        }
+    }
     public Main() {
         initComponents();
         setBackground(new Color(0,0,0,0));
@@ -95,6 +113,10 @@ public class Main extends javax.swing.JFrame {
             }
         });
         
+         JButton[] buttonsToApplyHandCursor = {jButton1, jButton2,jButton7,jButton6,jButton4,jButton3,jButton11,
+             jButton5, jButton9, jButton8, jButton10};
+        
+        ButtonCursorHandler.setHandCursors(buttonsToApplyHandCursor);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/search.png"))); 
        jButton1.setBorder(null);
@@ -142,11 +164,9 @@ public class Main extends javax.swing.JFrame {
          idtext();
         MainID.setVisible(false);
         initMoving(this);
-         
-      
+       
     }
     
-
     private int x;
     private int y;
     
@@ -624,8 +644,6 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         showForm(todo);
-        
-     
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
@@ -644,7 +662,6 @@ public class Main extends javax.swing.JFrame {
         if (search.getItemSize() > 0) {
             menu.show(txtSearch, 0, txtSearch.getHeight());
             search.clearSelected();
-          
         }
     }//GEN-LAST:event_txtSearchMouseClicked
 
@@ -659,7 +676,6 @@ public class Main extends javax.swing.JFrame {
             menu.setVisible(false);
             showForm(todo);
             performSearch(text);
-            
         }
     }//GEN-LAST:event_txtSearchKeyPressed
 
@@ -668,10 +684,8 @@ public class Main extends javax.swing.JFrame {
             String text = txtSearch.getText().trim().toLowerCase();
             search.setData(search(text));
             if (search.getItemSize() > 0) {
-                //  * 2 top and bot border
                 menu.show(txtSearch, 0, txtSearch.getHeight());
                 menu.setPopupSize(menu.getWidth(), (search.getItemSize() * 35) + 2);
-                 
             } else {
                 menu.setVisible(false);
             }
@@ -699,13 +713,10 @@ public class Main extends javax.swing.JFrame {
             break; 
         }
     }
-    
     if (!taskFound) {
         JOptionPane.showMessageDialog(this, "Task not found!");
     }
     }//GEN-LAST:event_jButton1ActionPerformed
-    
-    
     private void performSearch(String query) {
     DefaultTableModel model = (DefaultTableModel) todo.jTable1.getModel();
     boolean taskFound = false;
@@ -765,21 +776,13 @@ public class Main extends javax.swing.JFrame {
         e.printStackTrace();
     }
 }
-   
     private void addStory(String text) {
-   
 }
-    
-     
     private void setWhiteBorder(JTextField textField) {
     Border border = BorderFactory.createLineBorder(Color.WHITE);
     textField.setBorder(border);
 }
-    
-    
-    
-   
-    
+  
     /**
      * @param args the command line arguments
      */

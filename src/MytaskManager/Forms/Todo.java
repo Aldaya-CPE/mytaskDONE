@@ -89,6 +89,24 @@ public class Todo extends javax.swing.JPanel {
             jButton6ActionPerformed(evt);
         }
     });
+    
+    jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/new add.png"))); 
+    jButton3.setBorder(null);
+    jButton3.setToolTipText("insert"); 
+    jButton3.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jButton3ActionPerformed(evt);
+        }
+    });
+    
+    jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MytaskManager/Icon/done1.png"))); 
+    jButton2.setBorder(null);
+    jButton2.setToolTipText("close"); 
+    jButton2.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jButton3ActionPerformed(evt);
+        }
+    });
         
     }
 
