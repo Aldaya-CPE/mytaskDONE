@@ -26,6 +26,7 @@ import javax.swing.JButton;
 
 import java.awt.Color;
 import java.awt.Component;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -91,49 +92,43 @@ public class Todo extends javax.swing.JPanel {
         });
         timer.start();
         
-         for (int i = 0; i < jTable1.getColumnCount(); i++) {
-            jTable1.getColumnModel().getColumn(i).setCellRenderer(new Todo.WhiteTextSelectionRenderer());
-        }
+        
         
          JButton[] buttonsToApplyHandCursor = {jButton1, jButton2,jButton6,jButton3,
              jButton5};
         
         Todo.ButtonCursorHandler.setHandCursors(buttonsToApplyHandCursor);
 
-    jButton6.setToolTipText("Done"); 
-    jButton5.setToolTipText("More"); 
-    jButton1.setToolTipText("Add task"); 
-    jButton3.setToolTipText("insert");
-    jButton1.setToolTipText("close");
-    }
-
-      private class WhiteTextSelectionRenderer extends DefaultTableCellRenderer {
-        @Override
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            Component rendererComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-            if (isSelected) {
-                rendererComponent.setForeground(Color.WHITE);
-            } else {
-                rendererComponent.setForeground(table.getForeground());
-            }
-            return rendererComponent;
+        jButton6.setToolTipText("Done"); 
+        jButton5.setToolTipText("More"); 
+        jButton1.setToolTipText("Add task"); 
+        jButton3.setToolTipText("insert");
+        jButton1.setToolTipText("close");
         }
-    }
-    
-    public void setCurrentUserId(String userId) {
-        
-        todoid.setText(userId);
-        populateTable(); 
-    }
-    
+
     
     
     private void tableTextCenter() {
-        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        for (int i = 0; i < jTable1.getColumnCount(); i++) {
-            jTable1.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-        }
+    for (int i = 0; i < jTable1.getColumnCount(); i++) {
+        jTable1.getColumnModel().getColumn(i).setCellRenderer(new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                Component rendererComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                ((JLabel) rendererComponent).setHorizontalAlignment(SwingConstants.CENTER); 
+                if (isSelected) {
+                    rendererComponent.setForeground(Color.WHITE); 
+                } else {
+                    rendererComponent.setForeground(table.getForeground());
+                }
+                return rendererComponent;
+            }
+        });
     }
+    }
+    
+    
+    
+  
  
      public void populateTable() {
         try {
@@ -163,12 +158,56 @@ public class Todo extends javax.swing.JPanel {
     }
      
 
+//     
+//     private void checkDeadline() {
+//    try {
+//       String sql = "SELECT * FROM todo WHERE userId = ?";
+//          ps = Database.getInstance().getConnection().prepareStatement(sql); 
+//          ps.setString(1,todoid.getText());
+//        ResultSet rs = ps.executeQuery();
+//
+//        while (rs.next()) {
+//            String task = rs.getString("task");
+//            String deadlineStr = rs.getString("deadline");
+//            LocalDate deadline = LocalDate.parse(deadlineStr, DateTimeFormatter.ofPattern("dd-MM-yyyy")); 
+//            LocalDate currentDate = LocalDate.now();
+//            long daysUntilDeadline = java.time.temporal.ChronoUnit.DAYS.between(currentDate, deadline);
+//           
+//            
+//            if (daysUntilDeadline <= 3) {
+//                
+//                PreparedStatement checkPs = Database.getInstance().getConnection().prepareStatement("SELECT COUNT(*) AS count FROM deadlinedata WHERE task = ?");
+//                checkPs.setString(1, task);
+//                ResultSet checkRs = checkPs.executeQuery();
+//                
+//                checkRs.next();
+//                int count = checkRs.getInt("count");
+//                
+//                if (count == 0) {
+//                    PreparedStatement movePs = Database.getInstance().getConnection().prepareStatement("INSERT INTO deadlinedata (userId, task, deadline, timestamp) VALUES (?, ?, ?, ?)");
+//                     movePs.setString(1, todoid.getText()); 
+//                    movePs.setString(2, task);
+//                    movePs.setDate(3, Date.valueOf(deadline));
+//                    
+//                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+//                    movePs.setTimestamp(4, timestamp);
+//                    movePs.executeUpdate();
+//                }
+//            }
+//        }
+//
+//        ps.close();
+//    } catch (SQLException ex) {
+//        JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+//    }
+//}
+//            
      
      private void checkDeadline() {
     try {
-       String sql = "SELECT * FROM todo WHERE userId = ?";
-          ps = Database.getInstance().getConnection().prepareStatement(sql); 
-          ps.setString(1,todoid.getText());
+        String sql = "SELECT * FROM todo WHERE userId = ?";
+        ps = Database.getInstance().getConnection().prepareStatement(sql); 
+        ps.setString(1, todoid.getText());
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
@@ -177,27 +216,26 @@ public class Todo extends javax.swing.JPanel {
             LocalDate deadline = LocalDate.parse(deadlineStr, DateTimeFormatter.ofPattern("dd-MM-yyyy")); 
             LocalDate currentDate = LocalDate.now();
             long daysUntilDeadline = java.time.temporal.ChronoUnit.DAYS.between(currentDate, deadline);
-           
-            
+
             if (daysUntilDeadline <= 3) {
-                
                 PreparedStatement checkPs = Database.getInstance().getConnection().prepareStatement("SELECT COUNT(*) AS count FROM deadlinedata WHERE task = ?");
                 checkPs.setString(1, task);
                 ResultSet checkRs = checkPs.executeQuery();
-                
+
                 checkRs.next();
                 int count = checkRs.getInt("count");
-                
-                if (count == 0) {
-                    PreparedStatement movePs = Database.getInstance().getConnection().prepareStatement("INSERT INTO deadlinedata (userId, task, deadline, timestamp) VALUES (?, ?, ?, ?)");
-                     movePs.setString(1, todoid.getText()); 
-                    movePs.setString(2, task);
-                    movePs.setDate(3, Date.valueOf(deadline));
-                    
-                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                    movePs.setTimestamp(4, timestamp);
-                    movePs.executeUpdate();
+
+                if (count > 0) {
+                    continue;
                 }
+                PreparedStatement movePs = Database.getInstance().getConnection().prepareStatement("INSERT INTO deadlinedata (userId, task, deadline, timestamp) VALUES (?, ?, ?, ?)");
+                movePs.setString(1, todoid.getText()); 
+                movePs.setString(2, task);
+                movePs.setDate(3, Date.valueOf(deadline));
+
+                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                movePs.setTimestamp(4, timestamp);
+                movePs.executeUpdate();
             }
         }
 
@@ -206,7 +244,7 @@ public class Todo extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
 }
-            
+
      
     
 

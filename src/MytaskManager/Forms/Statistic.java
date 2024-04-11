@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 import java.awt.Color;
 import java.awt.Component;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -55,52 +56,63 @@ public class Statistic extends javax.swing.JPanel {
         });
         timer.start();
         
-         for (int i = 0; i < jTable5.getColumnCount(); i++) {
-            jTable5.getColumnModel().getColumn(i).setCellRenderer(new Statistic.WhiteTextSelectionRenderer());
-        }
-         
-          for (int i = 0; i < jTable6.getColumnCount(); i++) {
-            jTable6.getColumnModel().getColumn(i).setCellRenderer(new Statistic.WhiteTextSelectionRenderer());
-        }
-          
-           for (int i = 0; i < jTable7.getColumnCount(); i++) {
-            jTable7.getColumnModel().getColumn(i).setCellRenderer(new Statistic.WhiteTextSelectionRenderer());
-        }
+      
            
     }
          
-          private class WhiteTextSelectionRenderer extends DefaultTableCellRenderer {
-        @Override
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            Component rendererComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-            if (isSelected) {
-                rendererComponent.setForeground(Color.WHITE);
-            } else {
-                rendererComponent.setForeground(table.getForeground());
+        
+       private void tableTextCenter() {
+    for (int i = 0; i < jTable5.getColumnCount(); i++) {
+        jTable5.getColumnModel().getColumn(i).setCellRenderer(new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                Component rendererComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                ((JLabel) rendererComponent).setHorizontalAlignment(SwingConstants.CENTER); 
+                if (isSelected) {
+                    rendererComponent.setForeground(Color.WHITE); 
+                } else {
+                    rendererComponent.setForeground(table.getForeground());
+                }
+                return rendererComponent;
             }
-            return rendererComponent;
-        }
+        });
     }
-         
-      private void tableTextCenter() {
-        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        for (int i = 0; i < jTable5.getColumnCount(); i++) {
-            jTable5.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-        }
-    }
+}     
       
-       private void tableTextCenter2() {
-        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        for (int i = 0; i < jTable6.getColumnCount(); i++) {
-            jTable6.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-        }
+     private void tableTextCenter2() {
+    for (int i = 0; i < jTable6.getColumnCount(); i++) {
+        jTable6.getColumnModel().getColumn(i).setCellRenderer(new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                Component rendererComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                ((JLabel) rendererComponent).setHorizontalAlignment(SwingConstants.CENTER); 
+                if (isSelected) {
+                    rendererComponent.setForeground(Color.WHITE); 
+                } else {
+                    rendererComponent.setForeground(table.getForeground());
+                }
+                return rendererComponent;
+            }
+        });
     }
-       private void tableTextCenter3() {
-        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        for (int i = 0; i < jTable7.getColumnCount(); i++) {
-            jTable7.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-        }
+}     
+     private void tableTextCenter3() {
+    for (int i = 0; i < jTable7.getColumnCount(); i++) {
+        jTable7.getColumnModel().getColumn(i).setCellRenderer(new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                Component rendererComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+                ((JLabel) rendererComponent).setHorizontalAlignment(SwingConstants.CENTER); 
+                if (isSelected) {
+                    rendererComponent.setForeground(Color.WHITE); 
+                } else {
+                    rendererComponent.setForeground(table.getForeground());
+                }
+                return rendererComponent;
+            }
+        });
     }
+}     
        
           public void setCurrentUserId(String userId) {
         
