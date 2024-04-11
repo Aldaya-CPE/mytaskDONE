@@ -24,7 +24,7 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="lbIcon" min="-2" pref="25" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="lbText" pref="402" max="32767" attributes="0"/>
+              <Component id="lbText" pref="833" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lbRemove" min="-2" pref="55" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>

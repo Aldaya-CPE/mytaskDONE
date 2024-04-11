@@ -47,9 +47,6 @@ public class Statistic extends javax.swing.JPanel {
         statid.setText(userId);
         statid.setVisible(false);
         
-
-          
-            
             timer = new Timer(1000, (e) -> {
             updateLabelCounts();
             populateTable1();
