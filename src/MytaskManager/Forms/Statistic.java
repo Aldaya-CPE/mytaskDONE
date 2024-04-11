@@ -12,6 +12,10 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import java.awt.Color;
+import java.awt.Component;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 
 
 public class Statistic extends javax.swing.JPanel {
@@ -43,9 +47,7 @@ public class Statistic extends javax.swing.JPanel {
         statid.setText(userId);
         statid.setVisible(false);
         
-//        jPanel1.setVisible(false);
-//        jPanel2.setVisible(false);
-//        jPanel3.setVisible(false);
+
           
             
             timer = new Timer(1000, (e) -> {
@@ -55,7 +57,32 @@ public class Statistic extends javax.swing.JPanel {
             populateTable3();
         });
         timer.start();
+        
+         for (int i = 0; i < jTable5.getColumnCount(); i++) {
+            jTable5.getColumnModel().getColumn(i).setCellRenderer(new Statistic.WhiteTextSelectionRenderer());
+        }
+         
+          for (int i = 0; i < jTable6.getColumnCount(); i++) {
+            jTable6.getColumnModel().getColumn(i).setCellRenderer(new Statistic.WhiteTextSelectionRenderer());
+        }
+          
+           for (int i = 0; i < jTable7.getColumnCount(); i++) {
+            jTable7.getColumnModel().getColumn(i).setCellRenderer(new Statistic.WhiteTextSelectionRenderer());
+        }
            
+    }
+         
+          private class WhiteTextSelectionRenderer extends DefaultTableCellRenderer {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            Component rendererComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            if (isSelected) {
+                rendererComponent.setForeground(Color.WHITE);
+            } else {
+                rendererComponent.setForeground(table.getForeground());
+            }
+            return rendererComponent;
+        }
     }
          
       private void tableTextCenter() {
@@ -86,79 +113,7 @@ public class Statistic extends javax.swing.JPanel {
           populateTable3();
     }
           
-          
-//        public void populateTable1() {
-//    try {
-//       String sql = "SELECT task, 'todo' AS type FROM todo WHERE userId = ? " +
-//                     "UNION ALL " +
-//                     "SELECT task, 'deadlinedat' AS type FROM deadlinedata WHERE userId = ? " +
-//                     "UNION ALL " +
-//                     "SELECT task, 'completed' AS type FROM completed WHERE userId = ?";
-//        PreparedStatement ps = Database.getInstance().getConnection().prepareStatement(sql);
-//         ps.setString(1, statid.getText());
-//        ps.setString(2, statid.getText());
-//        ps.setString(3, statid.getText());
-//        ResultSet rs = ps.executeQuery();
-//
-//        DefaultTableModel model = (DefaultTableModel) jTable5.getModel();
-//        model.setRowCount(0);
-//
-//        while (rs.next()) {
-//             String task = rs.getString("task");
-//            String type = rs.getString("type");
-//            model.addRow(new Object[]{task, type});
-//        }
-//
-//        jTable5.setModel(model);
-//        ps.close();
-//    } catch (SQLException ex) {
-//        JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-//    }
-//}
-          
-//         public void populateTable1() {
-//    try {
-//        String sql = "SELECT task, 'todo' AS type, NULL AS deadline, NULL AS completed FROM todo WHERE userId = ? " +
-//                     "UNION ALL " +
-//                     "SELECT task, 'deadlinedata' AS type, task AS deadline, NULL FROM deadlinedata WHERE userId = ? AND deadline IS NOT NULL " +
-//                     "UNION ALL " +
-//                     "SELECT NULL AS task, 'completed' AS type, NULL AS deadline, task AS completed FROM completed WHERE userId = ? AND task IS NOT NULL";
-//
-//        PreparedStatement ps = Database.getInstance().getConnection().prepareStatement(sql);
-//        ps.setString(1, statid.getText());
-//        ps.setString(2, statid.getText());
-//        ps.setString(3, statid.getText());
-//        ResultSet rs = ps.executeQuery();
-//
-//        DefaultTableModel model = (DefaultTableModel) jTable5.getModel();
-//        model.setRowCount(0);
-//
-//        while (rs.next()) {
-//            String task = rs.getString("task");
-//            String type = rs.getString("type");
-//            String deadline = rs.getString("deadline");
-//            String completed = rs.getString("completed");
-//            
-//            if ("todo".equals(type)) {
-//                model.addRow(new Object[]{task, null, null});
-//            } else if ("deadlinedata".equals(type)) {
-//                model.addRow(new Object[]{null, deadline, null});
-//            } else if ("completed".equals(type)) {
-//                model.addRow(new Object[]{null, null, completed});
-//            }
-//        }
-//
-//        jTable5.setModel(model);
-//        ps.close();
-//    } catch (SQLException ex) {
-//        JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-//    }
-//}
-
-
-          
-          
-          
+ 
     public void populateTable1(){
         try {
               String sql = "SELECT * FROM todo WHERE userId = ?";

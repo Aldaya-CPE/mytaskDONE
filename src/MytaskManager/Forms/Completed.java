@@ -25,7 +25,10 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableCellRenderer;
 
-
+import java.awt.Color;
+import java.awt.Component;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 
 public class Completed extends javax.swing.JPanel {
      Connection MyCon;
@@ -83,6 +86,23 @@ public class Completed extends javax.swing.JPanel {
         });
         timer.start();
         
+         for (int i = 0; i < jTable2.getColumnCount(); i++) {
+            jTable2.getColumnModel().getColumn(i).setCellRenderer(new Completed.WhiteTextSelectionRenderer());
+        }
+        
+    }
+    
+      private class WhiteTextSelectionRenderer extends DefaultTableCellRenderer {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            Component rendererComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            if (isSelected) {
+                rendererComponent.setForeground(Color.WHITE);
+            } else {
+                rendererComponent.setForeground(table.getForeground());
+            }
+            return rendererComponent;
+        }
     }
     
     

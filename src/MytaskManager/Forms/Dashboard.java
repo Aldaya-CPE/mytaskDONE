@@ -22,6 +22,11 @@ import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+import java.awt.Color;
+import java.awt.Component;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+
 
 public class Dashboard extends javax.swing.JPanel {
       private Timer timer;
@@ -30,7 +35,8 @@ public class Dashboard extends javax.swing.JPanel {
     private String currentQuote;
     Timer t ;
     SimpleDateFormat st ;
-
+    
+    
     public Dashboard() {
         initComponents();
           try {
@@ -65,9 +71,25 @@ public class Dashboard extends javax.swing.JPanel {
             
         });
         timer.start();
+        
+        for (int i = 0; i < jTable5.getColumnCount(); i++) {
+            jTable5.getColumnModel().getColumn(i).setCellRenderer(new WhiteTextSelectionRenderer());
+        }
  
     }
     
+          private class WhiteTextSelectionRenderer extends DefaultTableCellRenderer {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            Component rendererComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            if (isSelected) {
+                rendererComponent.setForeground(Color.WHITE);
+            } else {
+                rendererComponent.setForeground(table.getForeground());
+            }
+            return rendererComponent;
+        }
+    }
         
           public void updateDeadline(){
         try {

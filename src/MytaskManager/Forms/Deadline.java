@@ -24,6 +24,13 @@ import javax.swing.Timer;
 import java.sql.Timestamp;
 import javax.swing.JButton;
 
+import java.awt.Color;
+import java.awt.Component;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+
+
+
 public class Deadline extends javax.swing.JPanel {
 
     Connection MyCon;
@@ -78,7 +85,26 @@ public class Deadline extends javax.swing.JPanel {
             populateTable();
         });
         timer.start();
+        
+        timer.start();
+        
+        for (int i = 0; i < jTable3.getColumnCount(); i++) {
+            jTable3.getColumnModel().getColumn(i).setCellRenderer(new Deadline.WhiteTextSelectionRenderer());
+        }
           
+    }
+    
+     private class WhiteTextSelectionRenderer extends DefaultTableCellRenderer {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            Component rendererComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            if (isSelected) {
+                rendererComponent.setForeground(Color.WHITE);
+            } else {
+                rendererComponent.setForeground(table.getForeground());
+            }
+            return rendererComponent;
+        }
     }
     
      public void setCurrentUserId(String userId) {

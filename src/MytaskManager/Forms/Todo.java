@@ -24,6 +24,11 @@ import javax.swing.Timer;
 import java.sql.Timestamp;
 import javax.swing.JButton;
 
+import java.awt.Color;
+import java.awt.Component;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+
 
 
 public class Todo extends javax.swing.JPanel {
@@ -86,21 +91,35 @@ public class Todo extends javax.swing.JPanel {
         });
         timer.start();
         
+         for (int i = 0; i < jTable1.getColumnCount(); i++) {
+            jTable1.getColumnModel().getColumn(i).setCellRenderer(new Todo.WhiteTextSelectionRenderer());
+        }
+        
          JButton[] buttonsToApplyHandCursor = {jButton1, jButton2,jButton6,jButton3,
              jButton5};
         
         Todo.ButtonCursorHandler.setHandCursors(buttonsToApplyHandCursor);
 
-        
-       
     jButton6.setToolTipText("Done"); 
     jButton5.setToolTipText("More"); 
     jButton1.setToolTipText("Add task"); 
     jButton3.setToolTipText("insert");
     jButton1.setToolTipText("close");
-        
     }
 
+      private class WhiteTextSelectionRenderer extends DefaultTableCellRenderer {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            Component rendererComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            if (isSelected) {
+                rendererComponent.setForeground(Color.WHITE);
+            } else {
+                rendererComponent.setForeground(table.getForeground());
+            }
+            return rendererComponent;
+        }
+    }
+    
     public void setCurrentUserId(String userId) {
         
         todoid.setText(userId);
