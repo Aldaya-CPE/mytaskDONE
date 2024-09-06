@@ -24,6 +24,8 @@ public class Database {
      public void ConnectToDatabase() throws  SQLException, ClassNotFoundException{
         String server = "127.0.0.1";
 //      String server = "192.168.133.150";
+
+//       String server = "192.168.133.108";
         String port = "3306";
         String database = "mytask";
         String user = "root";

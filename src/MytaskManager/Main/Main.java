@@ -118,7 +118,7 @@ public class Main extends javax.swing.JFrame {
         
         ButtonCursorHandler.setHandCursors(buttonsToApplyHandCursor);
 
-        
+       
        jButton1.setToolTipText("Search");
        jButton5.setToolTipText("View Riddle");
        jButton9.setToolTipText("Close");
@@ -365,6 +365,10 @@ public class Main extends javax.swing.JFrame {
         panelRound3.setLayout(panelRound3Layout);
         panelRound3Layout.setHorizontalGroup(
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound3Layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(MainID)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRound3Layout.createSequentialGroup()
                 .addContainerGap(29, Short.MAX_VALUE)
                 .addGroup(panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -381,10 +385,6 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17))
-            .addGroup(panelRound3Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(MainID)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound3Layout.setVerticalGroup(
             panelRound3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -155,11 +155,17 @@ public class Login extends javax.swing.JFrame {
 
         username.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         username.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(142, 117, 117)));
+        username.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usernameActionPerformed(evt);
+            }
+        });
 
         as.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         as.setForeground(new java.awt.Color(142, 117, 117));
         as.setText("Password:");
 
+        password.setToolTipText("");
         password.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(142, 117, 117)));
 
         jButton1.setBackground(new java.awt.Color(237, 195, 195));
@@ -401,6 +407,10 @@ public class Login extends javax.swing.JFrame {
         s.setVisible(true);
         s.genId.setText(generateUID());
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usernameActionPerformed
 
     /**
      * @param args the command line arguments
